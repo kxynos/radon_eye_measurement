@@ -1,0 +1,32 @@
+//------------------------------------------------
+//--- 010 Editor v11.0 Binary Template
+//
+//      File: radon-measurement.bt
+//   Authors: Konstantinos Xynos
+//   Version: 1.2
+//   Purpose: Decoding RadonEye replies from GATT Char.
+//            00001525-1212-EFDE-1523-785FEABCD123
+//  Category: 
+// File Mask: 
+//  ID Bytes: 
+//   History: 
+//------------------------------------------------
+
+typedef struct {
+  ubyte result_type;
+  ubyte total_size;
+  float measurement <comment=CalcMeas>;
+  float day  <comment=CalcMeas>;
+  float month  <comment=CalcMeas>;
+  ubyte pulse; 
+  ubyte pulse_10min; 
+}radon_meas;
+
+LittleEndian();
+radon_meas line;
+
+string CalcMeas( float &meas)
+{
+ return Str("%g Bq/m^3",(meas * 37.0));
+}
+
