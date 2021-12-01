@@ -55,5 +55,36 @@ Example reply data :
 
 ## Python Script details
 
-The script I provide makes use of the ```bleak``` and ```construct``` Python libraries.
+The script I provide makes use of the ```bleak``` and ```construct``` Python libraries. Check the [requirements.txt](requirements.txt) file.
 
+### How to get started:
+
+```
+$ git clone https://github.com/kxynos/radon_eye_measurement
+$ cd radon_eye_measurement
+$ virtualenv pyenv
+$ source pyenv/bin/activate
+(pyenv)$ pip3 install -r requirements.txt
+(pyenv)$ python3 radon_eye_measurement.py
+
+```
+Scan mode (when ```get_device = True```, this is the default initial state of the script)
+
+```
+[+] Running scan
+Address: Description
+XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX: FR:R20:SNXXXX
+```
+Open ```radon\_eye\_measurement.py``` with your favourit editor and paste this value ```XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX``` into the variable ```address```. Look for the FR:R20:SNXXX string at the end of the each line; this is the device name(address)(ini MS Windows it will have a different format) and serial number (you can match it with the one on the device). Also set ```get_device = False``` (we don't need it anymore, you might need it again if you change devices or get another one).
+
+Example changes to ```radon_eye_measurement.py``` to get it connecting to the RadonEye device:
+
+```
+def main():
+    print_debug = False
+    command_line = True
+    get_device = False # can be True or False
+    
+    address = "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" # copy the address here
+
+```
