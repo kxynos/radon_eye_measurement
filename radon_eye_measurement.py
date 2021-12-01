@@ -2,7 +2,7 @@
 # 
 # Description: Radon Eye (RD200) remote query script 
 # 
-# Author: Konstantinos Xynos (2020)
+# Author: Konstantinos Xynos (2020,2021)
 # How to: 
 #  * Run the application once with get_device = True
 #  * Copy the address of you Radon Eye into the address variable 
@@ -15,6 +15,9 @@
 # INCORRECT CODES/COMMANDS AND DATA TO IT. 
 # YOU ACCEPT FULL RESPONSILIBITY RUNNING THIS SCRIPT AND/OR ITS CONTENTS
 #
+# todo:
+# * Add JSON output
+# * Replace is_connected() 
 
 import asyncio
 from bleak import *
@@ -23,15 +26,17 @@ from datetime import datetime
 
 def main():
     print_debug = False
-    command_line = True
-    get_device = False # can be True or False
+    command_line = True # Change to False to print output values as x|x|x|x
+    get_device = True # can be True or False
     
-    address = "" # copy the address here
+    address = "" # copy the device address here
 
     radon_eye_struct = Struct(
             "command" / Int8ul,
             "total_msg_size" / Int8ul,
-            "measurement" / Float32l
+            "measurement" / Float32l,
+            "avg_day_measurement" / Float32l,
+            "avg_month_measurement" / Float32l
     )
 
     now = datetime.now()
@@ -78,13 +83,19 @@ def main():
                         radon_eye_struct_ = radon_eye_struct.parse(uuid_results)
                         if radon_eye_struct_.command == 80:
                             measurement_calc = radon_eye_struct_.measurement * 37
+                            avg_day_measurement_calc = radon_eye_struct_.avg_day_measurement * 37
+                            avg_month_measurement_calc = radon_eye_struct_.avg_month_measurement * 37
                             if command_line :
                                 date_time = now.strftime("%Y/%m/%d, %H:%M:%S")
                                 print("YYYY/MM/DD, HH:MM:SS : measurement ")
                                 print("{} : {:.2f}".format(date_time,measurement_calc))
+                                print("YYYY/MM/DD, HH:MM:SS : Day measurement (average) ")
+                                print("{} : {:.2f}".format(date_time,avg_day_measurement_calc))
+                                print("YYYY/MM/DD, HH:MM:SS : Month measurement (average) ")
+                                print("{} : {:.2f}".format(date_time,avg_month_measurement_calc))
                             else:
                                 date_time = now.strftime("%Y/%m/%d|%H:%M:%S")
-                                print("{}|{:.2f}".format(date_time,measurement_calc))
+                                print("{}|{:.2f}|{:.2f}|{:.2f}".format(date_time,measurement_calc,avg_day_measurement_calc,avg_month_measurement_calc))
                 finally:
                     await client.disconnect()
         except:
