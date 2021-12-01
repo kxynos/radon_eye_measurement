@@ -53,7 +53,7 @@ Example reply data :
 
 \* Keep in mind the device may round down or cut decimal points. 
 
-## Python Script details
+## Python Script
 
 The script I provide makes use of the ```bleak``` and ```construct``` Python libraries. Check the [requirements.txt](requirements.txt) file.
 
@@ -75,7 +75,7 @@ Scan mode (when ```get_device = True```, this is the default initial state of th
 Address: Description
 XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX: FR:R20:SNXXXX
 ```
-Open ```radon\_eye\_measurement.py``` with your favourit editor and paste this value ```XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX``` into the variable ```address```. Look for the FR:R20:SNXXX string at the end of the each line; this is the device name(address)(ini MS Windows it will have a different format) and serial number (you can match it with the one on the device). Also set ```get_device = False``` (we don't need it anymore, you might need it again if you change devices or get another one).
+Open ```radon_eye_measurement.py``` with your favourit editor and paste this value ```XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX``` into the variable ```address```. Look for the FR:R20:SNXXX string at the end of the each line; this is the device name(address)(ini MS Windows it will have a different format) and serial number (you can match it with the one on the device). Also set ```get_device = False``` (we don't need it anymore, you might need it again if you change devices or get another one).
 
 Example changes to ```radon_eye_measurement.py``` to get it connecting to the RadonEye device:
 
@@ -88,3 +88,5 @@ def main():
     address = "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" # copy the address here
 
 ```
+
+
