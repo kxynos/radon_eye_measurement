@@ -39,7 +39,7 @@ I provide a 010 Editor Template [radon-measure.bt](radon-measure.bt)
 
 Example reply data :
 
-```50 10 71 3D 8A 3F 71 3D AA 3F E1 7A B4 3F 06 00```
+```50 10 71 3D 8A 3F 71 3D AA 3F E1 7A B4 3F 03 00 06 00```
 
 |Offset|Value (hex)|Description| Type | Converted\* (Bq/m^3)|
 |---|---|---|---|---| 
@@ -48,8 +48,8 @@ Example reply data :
 |0x2|71 3D 8A 3F | current measurement| 1.08 float| 39.96|
 |0x6|71 3D AA 3F| average day measurement| 1.33 float|49.21|
 |0xA|E1 7A B4 3F | average month measurement| 1.41 float|52.17|
-|0xE|06 | pulse | 6 int |-|
-|0xF|00 | pulse 10 min| 0 int |-|
+|0xE|03 00| pulse | 3 int |-|
+|0x10|06 00 | pulse 10 min| 6 int |-|
 
 \* Keep in mind the device may round down or cut decimal points. 
 
