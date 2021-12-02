@@ -18,8 +18,8 @@ typedef struct {
   float measurement <comment=CalcMeas>;
   float day  <comment=CalcMeas>;
   float month  <comment=CalcMeas>;
-  ubyte pulse; 
-  ubyte pulse_10min; 
+  short pulse; 
+  short pulse_10min; 
 }radon_meas;
 
 LittleEndian();
