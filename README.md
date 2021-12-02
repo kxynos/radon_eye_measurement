@@ -28,8 +28,8 @@ The data that is returned to ```UUID_MEASUREMENT``` is in the following format:
 |0x2|4 | current measurement| float|
 |0x6|4 | average day measurement| float|
 |0xA|4 | average month measurement| float|
-|0xE|1 | pulse | int |
-|0xF|1 | pulse 10 min| int |
+|0xE|2 | pulse | int |
+|0x10|2 | pulse 10 min| int |
 
 The command should read ```0x50``` (this is now the reply to the command ```0x50``` sent). So for example, the current measurement is a float (4 bytes). The currrent measurement is then calculated by multiplying the float reading by 37 (for Bq/m^3, which is what I have it set it).
 
