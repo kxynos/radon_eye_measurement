@@ -27,6 +27,8 @@ radon_meas line;
 
 string CalcMeas( float &meas)
 {
- return Str("%g Bq/m^3",(meas * 37.0));
+  string s;
+  SPrintf(s, "%g Bq/m^3",(meas * 37.0));
+  return s;
 }
 
