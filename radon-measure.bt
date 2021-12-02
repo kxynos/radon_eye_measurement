@@ -5,7 +5,7 @@
 //   Authors: Konstantinos Xynos
 //   Version: 1.2
 //   Purpose: Decoding RadonEye replies from GATT Char.
-//            00001525-1212-EFDE-1523-785FEABCD123
+//            00001525-1212-EFDE-1523-785FEABCD123 of type 80
 //  Category: 
 // File Mask: 
 //  ID Bytes: 
@@ -13,22 +13,22 @@
 //------------------------------------------------
 
 typedef struct {
-  ubyte result_type;
+  ubyte result_type; // type 80
   ubyte total_size;
   float measurement <comment=CalcMeas>;
   float day  <comment=CalcMeas>;
   float month  <comment=CalcMeas>;
   short pulse; 
   short pulse_10min; 
-}radon_meas;
+}radon_measurement;
 
 LittleEndian();
-radon_meas line;
+radon_measurement line;
 
 string CalcMeas( float &meas)
 {
-  string s;
-  SPrintf(s, "%g Bq/m^3",(meas * 37.0));
-  return s;
+    string s;
+    SPrintf(s,"%g Bq/m^3",(meas * 37.0));
+    return s; 
 }
 
